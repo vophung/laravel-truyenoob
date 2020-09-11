@@ -17,7 +17,7 @@ Route::get('trangchu','Manage\ThemesController@trangchu')->name('trangchu');
 Route::get('danh-sach/truyen-moi','Manage\ThemesController@truyenmoi')->name('truyenmoi');
 Route::get('danh-sach/truyen-hoan-thanh','Manage\ThemesController@truyenfull')->name('truyenfull');
 Route::get('duongdantentruyen/{story}','Manage\ThemesController@notruyen')->name('tencuatruyen');
-Route::get('duongdantentruyen/{story}/chuong-{chuong}','Manage\ThemesController@chuong')->name('chuong');
+Route::get('duongdantentruyen/{story}/{chuong}','Manage\ThemesController@chuong')->name('chuong');
 Route::get('parent-category/{category}','Manage\ThemesController@parent_category')->name('parent-category');
 Route::get('parent-author/{author}','Manage\ThemesController@parent_author')->name('parent-author');
 // Route::get('/', function () {

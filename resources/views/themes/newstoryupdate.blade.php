@@ -9,7 +9,7 @@
             </div>
 
             <div class="row" itemscope itemtype="https://schema.org/Book">
-                @foreach($story as $stories)
+                @foreach($pag_story as $stories)
 				<div class="col-xs-9">
 					<div>
 						<span class="glyphicon glyphicon-book"></span>
@@ -23,7 +23,7 @@
                     <div>
                         @foreach($chapter as $story => $chap)
                         @if($story == $stories->id)
-                            <a href="#" title="{{$stories->name}} - {{$chap}}"><span class="chapter-text">
+                            <a href="{{route('chuong',['story' => $stories->id, 'chuong' => $stories->chapter->first()->id])}}" title="{{$stories->name}} - {{$chap}}"><span class="chapter-text">
                                 {{$chap}}
                             </a>
                         @endif
@@ -32,7 +32,6 @@
                 </div>
                 @endforeach
             </div>
-
 		</div>
 	</div>
 	<div class="visible-md-block visible-lg-block col-md-3 text-center col-truyen-side">
@@ -54,22 +53,7 @@
 <div class="container text-center pagination-container">
 	<div class="col-xs-12 col-sm-12 col-md-9 col-truyen-main">
 		<ul class="pagination pagination-sm">
-			<li class="active"><span>1<span class="sr-only"> (đang xem)</span></span></li>
-			<li><a href="https://truyenfull.vn/danh-sach/truyen-moi/trang-2/" title="Truyện mới cập nhật - Trang 2">2</a></li>
-			<li><a href="https://truyenfull.vn/danh-sach/truyen-moi/trang-3/" title="Truyện mới cập nhật - Trang 3">3</a></li>
-			<li><a href="https://truyenfull.vn/danh-sach/truyen-moi/trang-4/" title="Truyện mới cập nhật - Trang 4">4</a></li>
-			<li><a href="https://truyenfull.vn/danh-sach/truyen-moi/trang-6/" title="Truyện mới cập nhật - Trang 6">6</a></li>
-			<li><a href="https://truyenfull.vn/danh-sach/truyen-moi/trang-11/" title="Truyện mới cập nhật - Trang 11">11</a></li>
-			<li><a href="https://truyenfull.vn/danh-sach/truyen-moi/trang-2/" title="Truyện mới cập nhật - Trang 2"><span class="sr-only">Trang tiếp</span><span class="glyphicon glyphicon-menu-right"></span></a></li>
-			<li><a href="https://truyenfull.vn/danh-sach/truyen-moi/trang-772/" title="Truyện mới cập nhật - Trang 772">Cuối <span class="arrow">&raquo;</span></a></li>
-			<li class="dropup page-nav">
-				<a href="javascript:void(0)" data-toggle="dropdown">Chọn trang <span class="caret"></span></a>
-				<div class="dropdown-menu dropdown-menu-right" role="menu">
-					<form action="." name="page_jump" id="page_jump" method="get">
-						<div class="input-group"><input name="page_type" type="hidden" value="danh-sach"><input name="truyen" type="hidden" value="truyen-moi"><input name="filter" type="hidden" value=""><input class="form-control" name="page" type="number" placeholder="Số trang..." value=""><span class="input-group-btn"><button class="btn btn-default" type="submit">Đi</button></span></div>
-					</form>
-				</div>
-			</li>
+			<li class="active">{{$pag_story->links()}}</li>
 		</ul>
 	</div>
 </div>

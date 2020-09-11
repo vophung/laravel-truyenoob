@@ -73,22 +73,7 @@
             </div>
             <input id="truyen-id" type="hidden" value="10942"><input id="total-page" type="hidden" value="44"><input id="truyen-ascii" type="hidden" value="choc-tuc-vo-yeu-mua-mot-tang-mot-150520"><input id="truyen-comment" type="hidden" value="truyen-ngon-tinh-choc-tuc-vo-yeu-mua-mot-tang-mot"><input id="chapter-sac" type="hidden" value="1">
             <ul class="pagination pagination-sm">
-                <li class="active"><span>1<span class="sr-only"> (đang xem)</span></span></li>
-                <li><a href="https://truyenfull.vn/choc-tuc-vo-yeu-mua-mot-tang-mot-150520/trang-2/#list-chapter" title="Chọc Tức Vợ Yêu - Mua Một Tặng Một - Trang 2">2</a></li>
-                <li><a href="https://truyenfull.vn/choc-tuc-vo-yeu-mua-mot-tang-mot-150520/trang-3/#list-chapter" title="Chọc Tức Vợ Yêu - Mua Một Tặng Một - Trang 3">3</a></li>
-                <li><a href="https://truyenfull.vn/choc-tuc-vo-yeu-mua-mot-tang-mot-150520/trang-4/#list-chapter" title="Chọc Tức Vợ Yêu - Mua Một Tặng Một - Trang 4">4</a></li>
-                <li><a href="https://truyenfull.vn/choc-tuc-vo-yeu-mua-mot-tang-mot-150520/trang-6/#list-chapter" title="Chọc Tức Vợ Yêu - Mua Một Tặng Một - Trang 6">6</a></li>
-                <li><a href="https://truyenfull.vn/choc-tuc-vo-yeu-mua-mot-tang-mot-150520/trang-11/#list-chapter" title="Chọc Tức Vợ Yêu - Mua Một Tặng Một - Trang 11">11</a></li>
-                <li><a href="https://truyenfull.vn/choc-tuc-vo-yeu-mua-mot-tang-mot-150520/trang-2/#list-chapter" title="Chọc Tức Vợ Yêu - Mua Một Tặng Một - Trang 2"><span class="sr-only">Trang tiếp</span><span class="glyphicon glyphicon-menu-right"></span></a></li>
-                <li><a href="https://truyenfull.vn/choc-tuc-vo-yeu-mua-mot-tang-mot-150520/trang-44/#list-chapter" title="Chọc Tức Vợ Yêu - Mua Một Tặng Một - Trang 44">Cuối <span class="arrow">&raquo;</span></a></li>
-                <li class="dropup page-nav">
-                    <a href="javascript:void(0)" data-toggle="dropdown">Chọn trang <span class="caret"></span></a>
-                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                        <form action="." name="page_jump" id="page_jump" method="get">
-                            <div class="input-group"><input name="page_type" type="hidden" value=""><input name="truyen" type="hidden" value="choc-tuc-vo-yeu-mua-mot-tang-mot-150520"><input name="filter" type="hidden" value=""><input class="form-control" name="page" type="number" placeholder="Số trang..." value=""><span class="input-group-btn"><button class="btn btn-default" type="submit">Đi</button></span></div>
-                        </form>
-                    </div>
-                </li>
+                <li class="active">{{$chapter->links()}}</li>
             </ul>
         </div>
         <div class="col-xs-12 comment-box">

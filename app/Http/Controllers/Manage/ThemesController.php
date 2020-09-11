@@ -50,35 +50,24 @@ class ThemesController extends Controller
         ]);
     }
 
-    public function truyenmoi(){
-        $category = Category::with('story')->get();
-        $story = Story::with('author')->latest('updated_at','DESC')->get();
-        $chapter = Chapter::pluck('subname','story_id')->toArray();
-        // dd($chapter);
-        return view('themes.newstoryupdate')->with([
-            'category' => $category,
-            'chapter' => $chapter,
-            'story' => $story
-        ]);
-    }
-
     public function truyenfull(){
         $category = Category::with('story')->get();
-        $story = Story::with('author')->get();
-        $chapter = Chapter::with('story')->pluck('subname','story_id')->toArray();
-        // dd($chapter);
+        $chapter = Chapter::pluck('subname','story_id')->toArray();
+        $pag_story = Story::with(['chapter' => function ($query_chapter){
+            $query_chapter->latest();
+        },'author'])->where('status','=','1')->latest('updated_at','DESC')->paginate(8);
+
         return view('themes.truyenfull')->with([
             'category' => $category,
+            'pag_story' => $pag_story,
             'chapter' => $chapter,
-            'story' => $story
         ]);
-
     }
+
     public function notruyen(Story $story){
         $category = Category::with('story')->get();
         $story = Story::with('author','category')->where('id',$story->id)->first();
-        $chapter = Chapter::with('story')->where('story_id',$story->id)->oldest()->get();
-        //dd($authors);
+        $chapter = Chapter::with('story')->where('story_id',$story->id)->oldest()->paginate(2);
         return view('themes.no-story')->with([
             'category' => $category,
             'story' => $story,
@@ -97,11 +86,27 @@ class ThemesController extends Controller
         ]);
     }
 
+    public function truyenmoi(){
+        $category = Category::with('story')->get();
+        $chapter = Chapter::pluck('subname','story_id')->toArray();
+        $pag_story = Story::with(['chapter' => function ($query_chapter){
+            $query_chapter->latest();
+        }])->latest('updated_at','DESC')->paginate(8);
+
+        return view('themes.newstoryupdate')->with([
+            'category' => $category,
+            'pag_story' => $pag_story,
+            'chapter' => $chapter,
+        ]);
+    }
+
     public function parent_category($category){
-        $contain = Category::with(['story' => function ($query_story) {
-            $query_story->latest('id');
-        },'story.author'])->where('id',$category)->first();
-        
+        $contain = Category::with(['story','story.author'])->where('id',$category)->first();
+
+        $pag_story = $contain->story()->with(['chapter' => function ($query_chapter){
+            $query_chapter->latest(); 
+        }])->latest('updated_at','DESC')->paginate(8);
+      
         $chapter = Chapter::pluck('subname','story_id')->toArray();
 
         $category = Category::all();
@@ -109,22 +114,27 @@ class ThemesController extends Controller
         return view('themes.storyofcategory')->with([
             'category' => $category,
             'contain' => $contain,
-            'chapter' => $chapter
+            'chapter' => $chapter,
+            'pag_story' => $pag_story
         ]);
     }
 
     public function parent_author($author){
-        $contain = Author::with(['story' => function ($query_story) {
-            $query_story->latest('id');
-        },'story.author'])->where('id',$author)->first();
-        
+        $contain = Author::with(['story','story.author'])->where('id',$author)->first();
+
+        $pag_story = $contain->story()->with(['chapter' => function ($query_chapter){
+            $query_chapter->latest(); 
+        }])->latest('updated_at','DESC')->paginate(8);
+
         $chapter = Chapter::pluck('subname','story_id')->toArray();
 
         $category = Category::all();
-        return view('themes.storyofauthor')->with([
+
+        return view('themes.storyofcategory')->with([
             'category' => $category,
             'contain' => $contain,
-            'chapter' => $chapter
+            'chapter' => $chapter,
+            'pag_story' => $pag_story
         ]);
     }
 }
